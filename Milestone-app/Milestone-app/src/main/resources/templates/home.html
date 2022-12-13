@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--
+    Pitts, Dylan
+    Last modified: 1/27/2022
+    Project: SNHU IT634
+    Purpose: Home page, made to mimic index this page is only accessible if signed in
+
+    Potential update: If choose to use Spring Security will remove any need for this page and it would be deleted.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Home · Air Travel Service</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/navbars/">
+    
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!--Navigation bar from bootstrap using thymeleaf to generate on other pages-->
+    <nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="Second navbar example">
+        <div class="container-fluid">
+            <!--First link on navigation bar used to go home by calling root access-->
+            <a class="navbar-brand">Home</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        <div class="collapse navbar-collapse" id="navbarsExample02">
+            <ul class="navbar-nav me-auto">
+            <!-- if username is null -->
+            <li class="nav-item" th:if="${user.username} == null">
+                <!-- redirect to login.html -->
+                <a id="login" class="navbar-brand" th:href="@{/login}">Login</a>  
+                <!-- redirect to create.html -->
+                <a id="create" class="navbar-brand" th:href="@{/create}">Sign-up</a>  
+            </li>
+            <!-- if username is not null -->
+            <li class="nav-item" th:unless="${user.username} == null">
+                <!-- redirect to logout controller which redirects to root -->
+                <a id="logout" class="navbar-brand" th:href="@{/logout}">Logout</a>  
+                <!-- redirect to booking.html with username appeneded -->
+                <a id="booking" class="navbar-brand" th:href="@{/booking(username=${user.username})}">Booking</a>  
+            </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+<main>
+    <!-- on button press calls performance search from controller appened with username -->
+    <form class="mx-auto p-3" style="width: 400px;"
+    action="#"
+    th:action="@{/performsearch(username=${user.username})}"
+    th:object="${user}"
+    method="post"
+    >
+    <h5>Search with IATA code identifier for your departure airport</h5>
+        <!--Search bar, when search submitted call results.html through /performsearch action using IATA input from user-->
+        <input th:object="${search}" class="form-control" type="search" th:field="*{departure}" placeholder="e.g. BOS for Boston." aria-label="Search">
+    </form>
+</main>  
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

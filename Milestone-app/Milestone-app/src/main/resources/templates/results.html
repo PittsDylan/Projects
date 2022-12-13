@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!--
+    Pitts, Dylan
+    Last modified: 2/27/2022
+    Purpose: Create a list of flight data using search from index and if purchase is pressed add specified data to database
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Results · Air Travel Service</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/navbars/">
+    
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+        }
+
+        @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+        }
+        }
+    </style>
+
+</head>
+<body>
+     <!--Navigation bar from bootstrap using thymeleaf to generate on other pages-->
+      <nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="Second navbar example">
+        <div class="container-fluid">
+            <!--First link on navigation bar used to go home by calling root access-->
+            <a class="navbar-brand" th:href="@{/home(username=${user.username})}">Home</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        <div class="collapse navbar-collapse" id="navbarsExample02">
+            <ul class="navbar-nav me-auto">
+            <!-- if username is null -->
+            <li class="nav-item" th:if="${user.username} == null">
+                <!-- redirect to login.html -->
+                <a id="login" class="navbar-brand" th:href="@{/login}">Login</a>  
+                <!-- redirect to create.html -->                
+                <a id="create" class="navbar-brand" th:href="@{/create}">Sign-up</a>  
+            </li>
+            <!-- if username is not null -->
+            <li class="nav-item" th:unless="${user.username} == null">
+                <!-- redirect to logout controller which redirects to root -->
+                <a id="logout" class="navbar-brand" th:href="@{/logout}">Logout</a>  
+                <!-- redirect to booking.html with username appeneded -->
+                <a id="booking" class="navbar-brand" th:href="@{/booking(username=${user.username})}">Booking</a>  
+            </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+
+<main>
+    <!--Table of data, generates Departure, Arrival, Cost, Etc.. of flight intenary using results from API-->
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">From</th>
+            <th scope="col">City</th>
+            <th scope="col">Country</th>
+            <th scope="col">Departure</th>
+            <th scope="col">To</th>
+            <th scope="col">City</th>
+            <th scope="col">Country</th>
+            <th scope="col">Arrival</th>
+            <th scope="col">Seats Left</th>
+            <th scope="col">Cost</th>
+            <th scope="col">Reserve</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <!--contains flight data, generates depending on user input from index.html searchbar-->
+            <!--For each flight intenary from list of intenaries populate: -->
+            <tr scope="row"th:each="result : ${results}">
+              <!-- on button presses save specific intenary to database along with username -->
+              <form action="#" th:action="@{/saveBooking}" th:object="${b}" method="POST">
+                
+              <!-- username of logged in user -->
+              <input type="hidden" field="*{user.username}" name="username" th:value="${user.username}" class="form-control">
+
+              <!--Departure [hidden field for adding data to database on button press] -->             
+              <th scope="col" th:text="${result.flyFrom}" th:value="${result.flyFrom}">From</th>
+              <input type="hidden" field="*{result.flyFrom}" name="fromAirport" th:value="${result.flyFrom}" class="form-control">
+
+              <th scope="col" th:text="${result.cityFrom}" th:value="${result.cityFrom}">City</th>
+              <input type="hidden" field="*{result.cityFrom}" name="fromCity" th:value="${result.cityFrom}" class="form-control">
+
+              <th scope="col"th:text="${result.countryFrom.get('code')}" th:value="${result.countryFrom.get('code')}">Country</th>
+              <input type="hidden" field="*{result.countryFrom.get('code')}" name="fromCountry" th:value="${result.countryFrom.get('code')}" class="form-control">
+
+              <th scope="col" th:text="${result.utc_departure}" th:value="${result.utc_departure}">Departure</th>          
+              <input type="hidden" field="*{result.utc_departure}" name="from_utc" th:value="${result.utc_departure}" class="form-control">
+   
+              <!--Arrival [hidden field for adding data to database on button press] -->
+              <th scope="col" th:text="${result.flyTo}" th:value="${result.flyTo}">To</th>
+              <input type="hidden" field="*{result.flyTo}" name="toAirport" th:value="${result.flyTo}" class="form-control">
+
+              <th scope="col" th:text="${result.cityTo}" th:value="${result.cityTo}">City</th>
+              <input type="hidden" field="*{result.cityTo}" name="toCity" th:value="${result.cityTo}" class="form-control">
+
+              <th scope="col" th:text="${result.countryTo.get('code')}" th:value="${result.countryTo.get('code')}">Country</th>
+              <input type="hidden" field="*{result.countryTo.get('code')}" name="toCountry" th:value="${result.countryTo.get('code')}" class="form-control">
+
+              <th scope="col" th:text="${result.utc_arrival}" th:value="${result.utc_arrival}">Arrival</th>    
+              <input type="hidden" field="*{result.utc_arrival}" name="to_utc" th:value="${result.utc_arrival}" class="form-control">
+
+              <!--Availability [hidden field for adding data to database on button press] -->
+              <th scope="col" th:text="${result.availability.get('seats')}" th:value="${result.availability.get('seats')}">Availability</th>
+              <input type="hidden" field="*{result.availability.get('seats')}" name="seats" th:value="${result.availability.get('seats')}" class="form-control">
+
+              <!--Cost converts Euro into doller and formats it as currency [hidden field for adding data to database on button press] -->
+              <th scope="col" field="*{price}" name="price" th:text="${#numbers.formatCurrency(result.price * 1.1438)}" th:value="${result.price}">Cost</th>
+              <input type="hidden" field="*{result.price}" name="price" th:value="${#numbers.formatCurrency(result.price * 1.1438)}" class="form-control">
+
+              <!--Booking only displays button if signed in-->
+              <div th:object="${user}" >
+              <th th:if="*{username} != null"><button type="submit" class="btn btn-primary">Purchase</button></th>
+              <th th:unless="*{username} != null"></th>
+              </div>
+              </form>
+            </tr>
+          </tr>
+        </tbody>
+      </table>
+</main>  
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

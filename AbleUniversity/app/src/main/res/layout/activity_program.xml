@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProgramActivity">
+
+    <!--Home Button-->
+    <Button
+        android:id="@+id/home"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Able University"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--Expandable List of Departments and their Programs-->
+    <ExpandableListView
+        android:id="@+id/expanded_menu"
+        android:layout_width="0dp"
+        android:layout_height="394dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
+    <!--First Group of Buttons-->
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/expanded_menu">
+
+        <!--Program Button-->
+        <Button
+            android:id="@+id/programButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_menu_black_64dp"
+            android:text="Programs" />
+
+        <!--Class Button: [Not Implemented Beyond Scope of project]-->
+        <Button
+            android:id="@+id/button10"
+            android:layout_width="83dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_today_black_64dp"
+            android:text="Classes" />
+
+        <!--Register Button: [Not Implemented Beyond Scope of project]-->
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_school_black_64dp"
+            android:text="Register" />
+
+        <!--Book Button: [Not Implemented Beyond Scope of project]-->
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_book_black_64dp"
+            android:text="Books" />
+    </LinearLayout>
+
+    <!--Second Group of Buttons: [Not Implemented Beyond Scope of project]-->
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <!--Student ID Button: [Not Implemented Beyond Scope of project]-->
+        <Button
+            android:id="@+id/button9"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_star_black_64dp"
+            android:text="Stu.ID" />
+
+        <!--Parking Button: [Not Implemented Beyond Scope of project]-->
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_time_to_leave_black_64dp"
+            android:text="Parking" />
+
+        <!--Faculty Button: [Not Implemented Beyond Scope of project]-->
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_supervisor_account_black_64dp"
+            android:text="Faculty" />
+
+        <!--Jobs Button: [Not Implemented Beyond Scope of project]-->
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_card_travel_black_64dp"
+            android:text="Jobs" />
+
+        <!--About Button : [Not Implemented Beyond Scope of project]-->
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_sentiment_satisfied_black_64dp"
+            android:text="About" />
+    </LinearLayout>
+
+    <!--Searches ExpandableView and associated child items-->
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

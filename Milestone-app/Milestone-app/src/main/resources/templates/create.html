@@ -1,0 +1,70 @@
+<!doctype html>
+<!--
+    Pitts, Dylan
+    Last modified: 1/27/2022
+    Project: SNHU IT634
+    Purpose: Allow user to create an account if succesfull account will be added to accounts XML file
+-->
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Create Account</title>
+    <!--Replace this div with html in fragments/navigation.html-->
+    <!-- <div th:replace="~{fragments/navigation :: navigation}"></div> -->
+        <!--Navigation bar from bootstrap using thymeleaf to generate on other pages-->
+        <nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="Second navbar example" th:fragment="navigation">
+          <div class="container-fluid">
+              <!--First link on navigation bar used to go home by calling root access-->
+              <a class="navbar-brand" th:href="@{/}">Home</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+          <div class="collapse navbar-collapse" id="navbarsExample02">
+              <ul class="navbar-nav me-auto">
+              <!-- if username is null -->
+              <li class="nav-item" th:if="${user} == null">
+                  <!-- redirect to login.html -->
+                  <a id="login" class="navbar-brand" th:href="@{/login}">Login</a> 
+                  <!-- redirect to create.html -->   
+                  <a id="create" class="navbar-brand" th:href="@{/create}">Sign-up</a>  
+              </li>
+              <!-- if username is not null -->
+              <li class="nav-item" th:unless="${user} == null">
+                  <!-- redirect to logout controller which redirects to root -->
+                  <a id="logout" class="navbar-brand" th:href="@{/logout}">Logout</a>  
+                  <!-- redirect to booking.html with username appeneded -->
+                  <a id="booking" class="navbar-brand" th:href="@{/booking}">Booking</a>  
+              </li>
+              </ul>
+          </div>
+          </div>
+      </nav>
+  </head>
+  <body>
+    <form class="d-flex align-items-center flex-column p-2" action="#" th:action="@{/createaccount/(object)}" method="POST" th:object="${Users}">
+        <div class="form-group">
+          <!-- Input username -->
+          <label for="username">Username</label>
+          <input name="username" class="form-control" id="username" placeholder="Enter Username">
+        </div>
+        <div class="form-group">
+          <!-- Input password -->
+          <label for="password">Password</label>
+          <input name="password" class="form-control" id="password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+      </form>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

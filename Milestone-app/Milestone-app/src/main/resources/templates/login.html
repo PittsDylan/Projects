@@ -1,0 +1,94 @@
+<!doctype html>
+<!--
+    Pitts, Dylan
+    Last modified: 1/27/2022
+    Project: SNHU IT634
+    Purpose: Allow user to sign into account from the account XML file
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Login · Air Travel Service</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
+
+    <!-- Bootstrap core CSS -->
+<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+
+</head>
+<body class="text-center">
+
+    <!--Navigation bar from bootstrap using thymeleaf to generate on other pages-->
+    <nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="Second navbar example" th:fragment="navigation">
+      <div class="container-fluid">
+          <!--First link on navigation bar used to go home by calling root access-->
+          <a class="navbar-brand" th:href="@{/home(username)}">Home</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+      <div class="collapse navbar-collapse" id="navbarsExample02">
+          <ul class="navbar-nav me-auto">
+          <!-- if username is null -->
+          <li class="nav-item" th:if="${username} == null">
+              <!-- redirect to login.html -->
+              <a id="login" class="navbar-brand" th:href="@{/login}">Login</a>  
+              <!-- redirect to create.html -->  
+              <a id="create" class="navbar-brand" th:href="@{/create}">Sign-up</a>  
+          </li>
+          <!-- if username is not null -->
+          <li class="nav-item" th:unless="${username} == null">
+              <!-- redirect to logout controller which redirects to root -->
+              <a id="logout" class="navbar-brand" th:href="@{/logout}">Logout</a>
+              <!-- redirect to booking.html with username appeneded -->  
+              <a id="booking" class="navbar-brand" th:href="@{/booking(username)}">Booking</a>  
+          </li>
+          </ul>
+      </div>
+      </div>
+  </nav>
+<main class="form-signin">
+  <!--Sign in form-->
+  <form class="mx-auto p-3" style="width: 400px;" th:action="@{/attemptlogin}" method="POST" th:object="${Users}">
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+    <!--Input username-->
+    <div class="form-floating">
+      <input name="username" type="username" class="form-control" id="username" placeholder="John123">
+      <label for="username">Username</label>
+    </div>
+    <!--Input Password-->
+    <div class="form-floating">
+      <input name="password" type="password" class="form-control" id="password" placeholder="Password">
+      <label for="password">Password</label>
+    </div>
+    <!--Sign in button-->
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+  </form>
+</main>
+  </body>
+</html>

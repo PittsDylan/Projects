@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--
+    Pitts, Dylan
+    Last modified: 2/09/2022
+    Project: SNHU IT634
+    Purpose: Request Goverment Weather Service API and use Response to display weather data using lat, long
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Home · Weather Service</title>
+    
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container-fluid text-center">
+        <h5>Please Enter the Latitude and Langitude</h5>
+    </div>
+    <!-- Searchbar[gets user input] -->
+    <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <form class="d-flex mx-auto">   
+        <input id="searchWeather" class="form-control me-2" type="search" placeholder="Ex: 40.7484,-73.9856" aria-label="Search">
+        <button class="location-source btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+    </nav>
+    <!-- Displays Weather data -->
+    <div id="displayWeather" class="card text-center mx-auto p-2" style="width: 400px;">
+        <div class="card-header">
+            <!-- Displays location name[city, St.] -->
+            <P class="location-name">Todays Forecast For </P>
+        </div>
+        <div class="card-body">
+            <!-- Displays detailed Weather data -->
+          <p class="current-temp">The current Forecast is </p>
+        </div>
+      </div>
+<main>
+
+</main>  
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Gets JQeury-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Call weather.js to Get goverment weather service api and get weather based on user input -->
+    <script src= "../assets/dist/js/weather.js"></script>
+</body>
+</html>

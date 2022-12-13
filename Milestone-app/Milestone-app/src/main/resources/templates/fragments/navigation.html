@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--
+    Pitts, Dylan
+    Last modified: 1/27/2022
+    Project: SNHU IT634
+    Purpose: To create a navigation bar and use it on multiple webpages using thymeleaf framgments
+    [had some issues not currently in use]
+
+    Potential update: in the future implement all html pages to use this html as nav bar.
+-->
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Title</title>
+
+    <!-- Custom styles for this template -->
+    <link href="navbar.css" rel="stylesheet">
+</head>
+<body>
+    <!--Navigation bar from bootstrap using thymeleaf to generate on other pages-->
+    <nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="Second navbar example" th:fragment="navigation">
+        <div class="container-fluid">
+            <!--First link on navigation bar used to go home by calling root access-->
+            <a class="navbar-brand" th:href="@{/}">Home</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!--Second navigation link-->
+            <div class="collapse navbar-collapse" id="navbarsExample02">
+                <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <!-- Naviate to login page -->
+                    <a id="login" class="navbar-brand"  th:href="@{/login}">Login</a>
+                    <!-- Naviate to create account page -->
+                    <a id="signin" class="navbar-brand" th:href="@{/create}">Sign-up</a>  
+                    <a id="booking" class="navbar-brand" th:href="@{/booking}">Booking</a>  
+
+                    <a class="navbar-brand" th:href="@{/login}" th:classappend="${#request.getServletPath() == '/login' ? 'active':''}">Login</a>
+
+                </li>
+                <!-- <li role="separator"></li> -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>
